@@ -8,18 +8,20 @@ import edu.wpi.first.smartdashboard.types.named.StringChooserType;
 import edu.wpi.first.wpilibj.networktables2.type.StringArray;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.BoxLayout;
+import javax.swing.JRadioButton;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Joe Grinstead
@@ -39,15 +41,39 @@ public class Chooser extends AbstractTableWidget implements ITableListener {
   private Display display;
   private String selection;
   private StringArray choices = new StringArray();
-
   @Override
   public void init() {
     setResizable(false);
-
-    selection = null;
-
+    Object[] options = {"Forward",
+            "Center Gear",
+            "Left Gear",
+            "Right Gear",
+            "Boiler",
+            "None"};
+    int n = JOptionPane.showOptionDialog(this,
+            "",
+            "Autonomous Mode Selection",
+            JOptionPane.YES_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[2]);
+    if (n == 0) {
+      selection = "Forward";
+    }else if(n==1)  {
+      selection = "Center Gear";
+    }else if (n==2) {
+      selection = "Left Gear";
+    }else if (n==3) {
+      selection = "Right Gear";
+    }else if (n==4) {
+      selection = "Boiler";
+    }else if (n==5) {
+      selection = "None";
+    }
     display = useRadioButtons.getValue() ? new RadioButtons() : new ComboBox();
     display.setChoices(choices);
+
   }
 
   @Override

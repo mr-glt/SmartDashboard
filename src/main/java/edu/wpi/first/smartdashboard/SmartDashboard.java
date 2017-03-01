@@ -21,7 +21,7 @@ public class SmartDashboard {
   /**
    * Variable used in the {@link SmartDashboard#inCompetition() inCompetition()} method
    */
-  private static boolean inCompetition = false;
+  private static boolean inCompetition = true;
 
   /**
    * Returns whether or not this is in "competition" mode. Competition mode
